@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!-- import google icons -->
+    <link rel="stylesheet" href="/Additionals/Login.css">
+    <!-- improt styling sheet -->
+    <script defer src="/Additionals/js/scrollAnimation.js"></script>
+    <!-- import the js file -->
+    <title>Log In</title>
+</head>
+<body>
+    <!-- ----------------------- navigation styles start ----------------------- -->
+    <header>
+        <a href="/Index.html">
+            <h1 class="logo">PUNCHED! - Log In</h1>
+        </a>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <!-- has to be before the accual nav bar -->
+        <nav id="nav">
+        </nav>
+        <label for="nav-toggle" class="nav-toggle-label">
+            <!-- this will take the id that is called "nav-toggle" and make the following item clickable, so i won't need to click on the check box I would be able to just click on the mark I set below. for example it can be an "X" -->
+            <span></span>
+            <!-- this span tells the browser where the burger icon is. -->
+        </label>
+    </header>
+
+    <br> 
+
+    <form class="login-container">
+        <div class="login-title">
+            <h2>PUNCHED! - Log In</h2>
+        </div>
+        <div class="inputs">
+            <input type="email" placeholder="Enter mail address" required>
+            <input type="password" placeholder="Enter password" required>
+            <input class="submit" type="submit" value="Submit">
+            <br>
+        </div>
+        <div class="actions">
+            <input type="checkbox" name="" id="submit">
+            <label for="submit">Remeber me?</label>
+            <a href="#"><span>forget password</span></a>
+        </div>
+
+    </form>
+    
+</body>
+</html>
