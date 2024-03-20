@@ -4,12 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <!-- import google icons -->
-    <link rel="stylesheet" href="/Additionals/style.css">
     <!-- improt styling sheet -->
-    <script defer src="/Additionals/js/scrollAnimation.js"></script>
+    <link rel="stylesheet" href="/Additionals/style.css">
+
     <!-- import the js file -->
+    <script defer src="/Additionals/js/scrollAnimation.js"></script>
+    <script defer src="/Additionals/js/showImage.js"></script>
+    
+    <!-- import icons` -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!-- google icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    
+    <!-- cloudflare icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- bootstrap icons -->
     <title>Home</title>
 </head>
 <body>
@@ -25,7 +33,7 @@
                 <li><a href="#section-1">Home</a></li>
                 <li><a href="#jump">About Us</a></li>
                 <li><a href="#contact-us">Contact</a></li>
-                <li><a href="/Login.html">Log In</a></li>
+                <li><a href="/Signin.html">Log In</a></li>
             </ul>
         </nav>
         <label for="nav-toggle" class="nav-toggle-label">
@@ -51,12 +59,11 @@
         </div>
     </section>
     
-    <div id="jump"></div>
 
     <!-- features table using - the product benefits (cards) 
         the table needs to have a differant font -->
         <!-- th tags are used to set the table headers -->
-    
+        <div id="jump"></div>
     <section id="section-2" class="hidden">
             <div id="intro">
                 <h2>Take your training to the next level<br>Make every practice count</h2>
@@ -65,22 +72,22 @@
         <!-- table tages are used to create a table in the website. -->
             <tr>
             <!-- tr tags are used for the table rows. -->
-                <td class="tabs hidden">
+                <th class="tabs hidden">
                     <!-- td tags are used to hold the table data. -->
                     <span class="material-symbols-outlined">
                         ecg_heart
                     </span>
-                </td>
-                <td class="tabs hidden">
+                </th>
+                <th class="tabs hidden">
                     <span class="material-symbols-outlined">
                         diagnosis
                     </span>
-                </td>
-                <td class="tabs hidden">
+                </th>
+                <th class="tabs hidden">
                     <span class="material-symbols-outlined">
                         toggle_on
                     </span>
-                </td>
+                </th>
             </tr>
             <tr>
                 <td class="tabs hidden"><p>Keep track on your training</p></td>
@@ -120,8 +127,8 @@
     </section>
 
     <div id="jump2"></div>
-    <div id="#text" class="text">
-        <a href="#jump2"><h3>Discover a new dimension to your boxing routine with PUNCHED!</h3></a>
+    <div id="text" class="text">
+        <a href="#jump2"><h3>Give a new dimension to your boxing routine with PUNCHED!</h3></a>
     </div>
 
 
@@ -154,15 +161,37 @@
             </tr>
         </table>
     </section>
-
+    
     <section class="text" id="our-mission">
         <div  id="text">
             <h3>PUNCHED! is more than just a product, it's a movement towards a healthier and more connected lifestyle. Our mission is to empower individuals to punch their way to better fitness while fostering a community that encourages growth, support, and a shared love for the sport.</h3>
         </div>
     </section>
 
-    <!-- interest form
-    Form, input (button ,text ,hidden ,submit ,checkbox ,radio ,reset ,name)-->
+    <section id="contact-card" class="text">
+        <a onclick="displayImage()">
+        <!-- small easter egg button -->
+            <div class="card">
+                <img src="/Additionals/images/Amit-Photo.jpg" alt="Amit Meir Shoval" style="width:100%">
+                <h1>Amit Meir Shoval</h1>
+                <p class="title">CEO & Founder</p>
+                <div class="icons" style="margin: 24px 0;">
+                    <a href="https://github.com/amit0604" target="_blank"><i class="bi bi-github"></i></a> 
+                    &nbsp;
+                    <!-- &nbsp; like <br> but for spacing -->
+                    <a href="https://www.instagram.com/amit_._._._._/" target="_blank"><i class="fa fa-instagram"></i></a> 
+                    &nbsp;
+                    <a href="https://www.linkedin.com/in/amit-shoval-5a65a7167/" target="_blank"><i class="fa fa-linkedin"></i></a>
+                </div>
+            </div>
+        </a>
+    </section>
+    <!-- Callout message container -->
+    <div id="callout" class="text hidden">
+        <span id="closeButton" onclick="hideImage()">x</span>
+        <img src="https://cdn.dribbble.com/users/1532610/screenshots/3774870/boxing.gif" alt="Boxing GIF">
+    </div>
+
     
     <!-- contact us -->
         <section id="contact-us">
@@ -178,3 +207,14 @@
     
 </body>
 </html>
+
+
+
+<!-- 
+כשתסיים תריץ את הפקודה הזאת בטרמינל 
+firebase deploy
+ואז תכנס לאתר הזה
+https://punched-61c5e.web.app/ 
+למידע נוסף
+https://firebase.google.com/docs/hosting/quickstart?hl=en&authuser=0&_gl=1*7zvn76*_ga*MTU5OTY3NzMwNi4xNzAwNTE0NTk5*_ga_CW55HF8NVT*MTcwOTkxMzA2NS4xMC4xLjE3MDk5MTM2NTcuNjAuMC4w
+-->
