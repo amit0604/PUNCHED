@@ -1,0 +1,688 @@
+/* Basic Global Configurations */
+
+/* website font - imported from google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* create color variables */
+:root{
+    /* --navBackground: rgba(85,214,170,.85) */
+    --navBackground: rgba(240, 248, 150, 0.85);
+    --navBackgroundHover: rgb(185, 190, 127,.90);
+    --text1: rgb(255, 255, 255);
+    --text2: rgb(192, 192, 192);
+    --textHover: #333;
+    --dshbrdBackground:rgb(130, 130, 130);
+    --sideBar:#222;
+    --dshbrdItems:#6f6f6f;
+    --dshbrdCard: #cecece;
+}
+
+body{
+    /* styling the html body */
+    margin: 0;
+    padding: 0;
+    /* telling the browser that the body of the screen would fill the entire screen without any extra space around the page */
+    box-sizing: border-box;
+    background-color: var(--dshbrdBackground);
+    font-family: "Poppins", sans-serif;
+}
+
+.material-symbols-outlined{
+    vertical-align: middle;
+    line-height: 1px;
+}
+
+.grid-container{
+    /* definig grid layout */
+    display: grid;
+    /* all the child items within the grid will become grid items */
+    grid-template-columns: 16.25em 1fr 1fr 1fr;
+    /* defining the amount of columns */
+    /* fr- flexible unit the ecualse to a part of the whole 1=100%, 2=50%,3=33.333%,...*/
+    /* 1fr 1fr 1fr 1fr = 25% 25% 25% 25% */
+    /* this will set the sidebar width to be always 260px (16.25em) and the rest of the page would be splited by the remaining 3 fr's.
+    the available width will change based on the device width*/
+    grid-template-rows: 0.2fr 3fr ;
+    /* sewtting the page rows */
+    /* leaving 0.2fr for thw header */
+    grid-template-areas: 
+        "sidebar header header header"
+        "sidebar main main main";
+    /* specifying the division of the grid layout */
+    height: 100vh;
+    /* setting the height to 100% of the visible area of the webpage */
+}
+
+.space{
+    padding: .5em;
+}
+
+/* ------------------------ HEADER ------------------------ */
+.header{
+    grid-area: header;
+    /* match the values specified in the grid template area */
+    height: 4.375em;
+    background-color: var(--navBackground);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* allows us to place items in the header with space between them */
+    padding: 0em 30px 0em 30px;
+}
+
+.header-right{
+    cursor:grab;
+
+}
+
+.header-right button{
+    background: transparent;
+    color: var(--text1);
+    border: none;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.menu-icon{
+    display: none;
+}
+
+.menu-icon:hover{
+    cursor: pointer;
+}
+
+/* Popup container */
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  /* The actual popup (appears on top) */
+  .popup .popuptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: -190%;
+    left: 50%;
+    margin-left: -80px;
+    box-shadow: 1px 1px 15px var(--sideBar);
+  }
+  
+  /* Popup arrow */
+  .popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: -20%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #555 transparent;
+  }
+  
+  /* Toggle this class when clicking on the popup container (hide and show the popup) */
+  .popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s
+  }
+  
+  /* Add animation (fade in the popup) */
+  @-webkit-keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+  }
+
+/* ------------------------ SIDEBAR ------------------------ */
+#sidebar{
+    grid-area: sidebar;
+    /* match the values specified in the grid template area */
+    height: 100%;
+    background: linear-gradient(90deg, rgb(61, 61, 61) 0%, rgba(101,101,101,1) 100%);
+    color: var(--text1);
+    overflow-y: auto;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    z-index: 998;
+}
+
+.sidebar-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px 20px 20px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.sidebar-brand {
+    transition: all .2s ease-in-out;
+}
+
+.sidebar-brand :hover{
+    transform: scale(1.1); 
+    filter: drop-shadow(10px 10px 15px rgb(0, 0, 0));
+}
+
+.sidebar-title span:hover{
+    cursor: pointer;
+}
+
+.sidebar-title span{
+    display: none;
+}
+
+.sidebar-brand{
+    margin-top: 15px;
+    font-style: 20px;
+    font-weight: 700;
+}
+
+.sidebar-brand a{
+    text-decoration: none;
+    color: var(--text1);
+}
+
+.sidebar-list{
+    padding: 0;
+    margin-top: 15px;
+    list-style-type: none
+}
+
+.sidebar-list-item{
+    padding: 20px 20px 20px 20px;
+    transform: all .2s ease-in-out;
+    /* animatoin delay for scaling */
+}
+
+.sidebar-list-item:hover{
+    background-color: rgba(255,255,255,0.2);
+    cursor: pointer;
+    transform: scale(1.1);
+    /* on hover the item is going to scale up */
+}
+
+.sidebar-responsive{
+    display: inline !important;
+    /* !important will overwrite all previuse rules for that property */
+    position: absolute;
+}
+
+.sidebar span{
+    z-index: 999;
+}
+/* ------------------------ MAIN ------------------------ */
+.main-container{
+    grid-area: main;
+    /* match the values specified in the grid template area */
+    background-color: var(--dshbrdCard);
+    overflow-y: auto;
+    padding: 20px 20px;
+}
+
+.main-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-title p{
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 2em;
+    padding-left: .6em;
+}
+
+.main-card{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1em;
+    margin: 1em 0;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 2em;
+    background-color: var(--text1);
+    color: var(--sideBar);
+    box-sizing: border-box;
+    border: none;
+    border-radius: 1em;
+    box-shadow: 1px 1px 15px var(--sideBar);
+}
+
+#clock{
+    width: 100%;
+    /* position: absolute; */
+    font-size: 2em;
+    /* text-align: center; */
+    font-family: "PT Sans", sans-serif;
+    font-weight: 400;
+    text-align: center;
+}
+
+.card:hover{
+    color:var(--navBackgroundHover);
+}
+
+.card:first-child:hover{
+    box-shadow: 1px 1px 20px var(--navBackground);
+}
+
+.card:nth-child(2):hover{
+    box-shadow: 1px 1px 20px var(--navBackground);
+}
+
+.card:nth-child(3):hover{
+    box-shadow: 1px 1px 20px var(--navBackground);
+}
+
+.card:nth-child(4):hover{
+    box-shadow: 1px 1px 20px var(--navBackground);
+    cursor: pointer;
+}
+
+.card span{
+    font-size: 2em;
+    font-weight: 400;
+}
+
+.card-inner{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    
+}
+
+.card-heart{
+    justify-content:space-evenly;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    text-align: center;
+    font-size: 2em;
+}
+
+
+.card-spo1{
+    justify-content:center;
+}
+
+.card-spo2{
+    justify-content:center;
+    font-size: 2em;
+}
+
+.card-inner p{
+    font-size: 1.1em;
+}
+
+.card-inner span{
+    font-size: 2em;
+}
+
+/* -------------------------> charts */
+
+.charts{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1em;
+}
+
+.charts-card{
+    background-color: #fff;
+    margin-bottom: 1em;
+    padding: 1.3em;
+    box-sizing: border-box;
+    -webkit-column-break-inside: avoid;
+    border: none;
+    border-radius: 1em;
+    box-shadow: 1px 1px 15px var(--sideBar);
+}
+
+.chart-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.7em;
+    font-weight: 600;
+}
+
+.chart-start{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.7em;
+    font-weight: 600;
+}
+
+.play{
+    text-align: center;
+    font-size: 7em;
+}
+
+.charts-active{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1em;
+}
+/* ------------------------ MEDIA QUERIES ------------------------ */
+
+@media screen and (max-width:1350px) {
+    .charts-active{
+        grid-template-columns: 1fr;
+    }
+}
+
+/* @media screen and (min-width:1560px) {
+    .charts-active{
+        grid-template-columns: 1fr;
+
+    }
+} */
+
+/* Medium size screen */
+@media screen and (max-width:1024px){
+    .grid-container{
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.2fr 3fr;
+        grid-template-areas: 
+            "header"
+            "main";
+    }
+    
+    #sidebar{
+        display: none;
+    }
+    
+    .menu-icon{
+        display: inline;
+    }
+
+    .sidebar-title span{
+        display: inline; 
+    }
+
+    .header-left .material-symbols-outlined{
+        display: none;
+    }
+}
+
+/* small size screen */
+@media screen and (max-width:768){
+    .main-card{
+        grid-template-columns:1fr;
+        gap: 10px;
+        margin-bottom: 0;
+    }
+
+    .charts{
+        grid-template-columns: 1fr;
+        margin-top: 2em;
+    }
+}
+
+
+/* extra small size screen */
+@media screen and (max-width:576){
+    .header-left{
+        display: none;
+    }
+}
+
+
+/* ----------------------------------------- QUICK START - PRACTICE HUB ----------------------------------------- */
+#quick-start{
+    display: none;
+}
+
+.practice-hub{
+    background-color: var(--dshbrdBackground);
+    padding: .7em 1.7em;
+    border-radius: 1em;
+}
+
+.practice{
+    color: var(--text1);
+}
+
+.practice-card{
+    color: var(--text1);
+    background-color: var(--textHover);
+}
+
+.chart-start:hover{
+    cursor: pointer;
+    color: var(--text2);
+}
+
+.action-buttons{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: space-evenly;
+    color: --;
+}
+
+.action-buttons button{
+    background: none;
+    border: none;
+    color: var(--text1);
+}
+
+/* ----------------------------------------- beating heart animation */
+.heart-rate{
+    position: relative;
+    margin: 20px auto;
+}
+
+.fade-in{
+    position: absolute;
+    width: 30%;
+    height: 100%;
+    background-color: var(--textHover);
+    top: 0;
+    right: 0;
+    animation: heartRateIn 2.5s linear infinite;
+}
+
+.fade-out{
+    position: absolute;
+    width: 30%;
+    height: 100%;
+    background-color: var(--textHover);
+    top: 0;
+    right: 0%;
+    animation: heartRateOut 2.5s linear infinite;
+    background: var(--textHover);
+}
+
+@keyframes heartRateIn{
+    0%{
+        width: 100%;
+    }
+    50%{
+        width: 0;
+    }
+    100%{
+        width: 0;
+    }
+}
+
+@keyframes heartRateOut{
+    0%{
+        right: 0%;
+    }
+    30%{
+        right: 0%;
+    }
+    100%{
+        right: 0;
+    }
+}
+
+/* ----------------------------------------- Stop Watch */
+
+.stopwatch{
+    margin-bottom: .2em;
+    border-radius: .25em;
+}
+
+#time-container{
+    text-align: center;
+}
+
+#time-display{
+    font-size: 4.5em;
+}
+
+.practice-end{
+    width: 100%;
+    padding: 1em;
+    border-radius: 1em;
+    margin-bottom: 0.5em;
+}
+
+@media screen and (max-width:950){
+    #time-display{
+        font-size: 2.5em;
+    }    
+}
+
+
+/* ----------------------------------------- Workout History ----------------------------------------- */
+#workout-history{
+    display: none;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+th {
+    background-color: #f2f2f2;
+}
+.remove-icon {
+    color: black;
+}
+.remove-icon:hover {
+    color: red;
+    cursor: pointer;
+}
+
+/* ----------------------------------------- Workout Report ----------------------------------------- */
+
+
+#workout-history,#reports{
+    display: none;
+}
+
+#reports{
+    /* display: none; */
+    background-color: var(--textHover);
+    border-radius: 1em;
+    padding-bottom: 1em;
+}
+
+.date{
+    margin-right: 1em;
+}
+
+.report-container{
+    display: grid;
+    grid-template-columns: 20% 78%;
+}
+
+.report-container div{
+    margin: 1em;
+}
+
+.value{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 2em;
+    background-color: var(--text1);
+    color: var(--sideBar);
+    box-sizing: border-box;
+    border: none;
+    border-radius: 1em;
+    font-size: 1.5em;
+    
+}
+
+.value input{
+    text-align: center;
+    font-size: .8em;
+}
+
+.value:first-child:hover{
+    box-shadow: 1px 1px 20px red;
+}
+
+.value:nth-child(2):hover{
+    box-shadow: 1px 1px 20px lightblue;
+}
+
+.value:nth-child(3):hover{
+    box-shadow: 1px 3px 20px orange;
+}
+
+#valueUpdate{
+    margin-left: .8em;
+    font-size: 3em;
+    color: var(--text1);
+}
+
+#valueUpdate:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.report-container2{
+    display: grid;
+    grid-template-columns: 60% 40%;
+}
+
+/* ----------------------------------------- ring chart */
+.ring-chart {
+    width: 400px;
+    height: 400px;
+    position: relative;
+}
+.ring {
+    fill: none;
+    stroke-width: 20;
+}
+
+/* ----------------------------------------- Data */
+#data{
+    display: inline-flex;
+    flex-direction: row;
+    text-align: start;
+}
+
+#workoutDuration{
+    margin: 0;padding: 0;
+}

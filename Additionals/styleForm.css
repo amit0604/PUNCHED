@@ -1,0 +1,191 @@
+/* Basic Global Configurations */
+
+/* website font - imported from google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* create color variables */
+:root{
+    /* --navBackground: rgba(85,214,170,.85) */
+    --navBackground: rgba(240, 248, 150, 0.85);
+    --navBackgroundHover: rgb(185, 190, 127,.90);
+    --text1: rgb(255, 255, 255);
+    --text2: rgb(192, 192, 192);
+    --textHover: #333;
+    --dshbrdBackground:rgb(130, 130, 130);
+    --sideBar:#222;
+    --dshbrdItems:#6f6f6f;
+    --dshbrdCard: #cecece;
+    --textLink:#0d57ab;
+}
+
+body{
+    top: 0;
+    left: 0;
+    /* styling the html body */
+    margin: 0;
+    padding: 0;
+    /* telling the browser that the body of the screen would fill the entire screen without any extra space around the page */
+    box-sizing: border-box;
+    background-color: var(--dshbrdBackground);
+    font-family: "Poppins", sans-serif;
+    /* font-family: "Pt-sans", sans-serif; */
+    color: var(--text1);
+
+}
+
+/* ------------------- HEADER ------------------- */
+header{
+    margin-bottom: 4em;
+}
+
+header nav input:hover{
+    background-color: var(--navBackgroundHover);
+}
+
+header nav input{
+    width: 100%;
+    height: 10vh;
+    font-size: 2em;
+    font-weight: bold;
+    border: none;
+    background-color: var(--navBackground);
+    color: var(--text1);
+    box-shadow: 10px 8px 30px 1px var(--textHover);
+}
+
+@media screen and (min-width:800px) {
+/* IPAD DISPLAY */
+    header nav input{
+        font-size: 2.6em;
+    }
+
+    header{
+        margin-bottom:3em;
+    }
+
+}
+
+@media screen and (min-width:900px) {
+/* PC DISPLAY */
+    header nav input{
+        font-size: 2.8em;
+    }
+
+}
+
+/* ------------------- MAIN ------------------- */
+main{
+    margin: auto;
+    width: 80%;
+    border: 1px solid var(--sideBar);
+    border-radius: 1em;
+    padding: 1em;
+    background-color: var(--sideBar);
+    box-shadow: 10px 8px 30px 1px var(--textHover);
+}
+
+
+main form{
+    width: 100%;
+    height: 100%;
+}
+
+form h2{
+    text-align: center;
+}
+
+.form-inputs{
+    margin: auto;
+    width: 90%;
+}
+
+.form-inputs label{
+    font-size: 1.5em;
+}
+
+.form-inputs span:hover{
+    cursor: pointer;
+    color: var(--text2);
+    text-decoration: underline;
+}
+
+.credentials, .SignIn{
+    width: 100%;
+    font-size: 1em;
+    padding-bottom: 0.4em;
+    padding-top: 0.4em;
+    border-radius: .4em;
+    border: none;
+    margin-bottom: 1em;
+    align-items: center;
+}
+
+.SignIn{
+    color: var(--text1);
+    font-size: 1.7em;
+    background-color: var(--navBackground);
+    text-transform: uppercase;
+    margin-bottom: .6em;
+}
+
+.SignIn:hover{
+    background-color: var(--navBackgroundHover);
+}
+
+.radioBtn{
+    display: none;
+}
+
+.linkHover:hover{
+    cursor: pointer;
+    color: var(--text2);
+    text-decoration: underline;
+}
+
+.clear{
+    width: 50%;
+    font-size: 1.7em;
+    padding: 0.3em;
+    transform: translate(50%);
+}
+
+.clear:hover{
+    background-color: var(--navBackgroundHover);
+    color: var(--text1);
+}
+
+@media screen and (min-width:800px) {
+/* IPAD DISPLAY */
+    main{
+        width: 70%;
+    }
+
+    form{
+        font-size: 2em;
+    }
+
+    .radio-label{
+        margin-bottom: 1em;
+    }
+}
+
+@media screen and (min-width:900px) {
+/* PC DISPLAY */
+    main{
+        width: 40%;
+    }
+
+    form{
+        font-size: 1.5em;
+    }
+
+    .radio-label{
+        margin-bottom: 1em;
+    }
+}
+
+/* ------------------- FOOTER ------------------- */
+footer{
+    grid-area: footer;
+}

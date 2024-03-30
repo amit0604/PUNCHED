@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/Additionals/styleForm.css">
+
+    
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-firestore.js"></script>
+    <script src="/Additionals/js/initializeFirebase.js"></script>
+    <script src="/Additionals/js/firebaseAddUser.js"></script>
+    <title>Signup</title>
+</head>
+<body> 
+    <!-- HEADER -->
+    <header>
+        <nav>
+            <input id="Home" type="button" value="PUNCHED!" onclick="window.location.replace('Index.html')">
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+        <form id="MainForm-Signup">
+            <div class="form-title">
+                <h2>Sign Up</h2>
+            </div>
+            <div class="form-inputs">
+                <label for="fname">First Name</label>    
+                <input class="credentials" type="text" id="fname" placeholder="First Name">
+                <label for="lanme">Surname</label>    
+                <input class="credentials" type="text" id="lname" placeholder="Last Name">
+                <label for="phone">Phone Number</label>    
+                <input class="credentials" type="tel" name="phone number" id="phone" placeholder="Phone Number">
+                <label for="email">Enter Email</label>    
+                <input class="credentials" type="email" id="email" placeholder="E-mail">
+                <label for="password">Enter Password</label>    
+                <input class="credentials" type="password" id="password" placeholder="Password">
+
+                <input class="SignIn" type="button" value="Create" onclick="RegisterUser()">
+                
+                <div class="clear-container">
+                    <input class="credentials SignIn clear" type="reset" value="clear">
+                </div>
+                <input type="hidden" name="hidden">
+                <span onclick="window.location.replace('Signin.html')">Sign In</span>
+            </div>
+        </form>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+    </footer>    
+
+
+    
+</body>
+</html> 
