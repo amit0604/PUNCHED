@@ -1,0 +1,711 @@
+/* Basic Global Configurations */
+
+/* website font - imported from google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+/* create color variables */
+:root{
+    /* --navBackground: rgba(85,214,170,.85) */
+    --navBackground: rgba(240, 248, 150, 0.85);
+    --navBackgroundHover: rgb(185, 190, 127,.90);
+    --text1: rgb(255, 255, 255);
+    --text2: rgb(192, 192, 192);
+    --textHover: #333;
+    --sideBar:gray;
+    --dshbrdBackground:beige;
+    
+}
+
+html{
+    scroll-behavior: smooth;
+    /* makes smooth scrolling  */
+    color: var(--text1);
+    /* make all text automaticly the same color */
+    
+}
+
+/* reset box sizing - it allow us to include padding and border in element total width and hight regardless the browser default settigns*/
+::before,*::after{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    background:#222 ;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    
+}
+
+#section-1{
+    height: 450px;
+}
+
+@media screen and (min-width:800px) {
+    #section-1{
+        height: 800px;
+    }
+}
+
+.content{
+    height: 100vh;
+    /* border-image: ; */
+    background-blend-mode: multiply;
+    block-size: cover;
+    display: grid;
+    place-items: center;
+}
+
+/* -----------------------> navigation styles start <----------------------- */
+
+/* 
+Working Methods:
+    -   I'm going to strat designing from small screens and scale up, means Phones-> Tablets -> Copmuters.
+    -   I'm going to work from the outside in, that way I'll make sure everything is in the right container and have the right spacing it needs.     
+*/
+
+header{
+    background: var(--navBackground);
+    text-align: center;
+    position: fixed;
+    /* to make the navbar at the top and to spread across the screen */
+    z-index: 999;
+    width: 100%;
+    justify-items: center;
+}
+
+header a{
+    text-decoration: none;
+}
+
+header:hover{
+    background: var(--navBackgroundHover);
+    color: var(--text2);
+}
+
+/* .
+logo{
+    Is going to decide how tall the navigatioln is dou it is the largest element in the nav.
+    It would be effected by the margin
+}
+*/
+
+.logo{
+    color:var(--text1);
+
+}
+
+nav{
+    position: absolute;
+    /* relative to the overall position of the header's position fixed */
+    text-align: left;
+    /* aligns the bar items's text to the left */
+    top: 100%;
+    /* the top would line up under the bar, moved 100% down */
+    left: 0;
+    /* to control the exsact location of the items */
+    background: var(--navBackground);
+    width: 100%;
+    /* background for the items */
+    transform: scale(1,0);
+    /* the scale would take the input number as a precentage 0 as 0% 0.5 as 50% 1 as 100%. It can get to vlaues: Width and Hight (in order).
+    On this example it is set to be 100% Width an 0% Hight.*/
+    
+    transition: transform 400ms ease-in-out;
+    /* the advantage of transform over display:none is the ability to aplly transition. apllying transition means that I can animate the action */
+    transform-origin: top;
+    /* the default animation wa to collapse and stretch from the center, this line say:"collapse or expand from the top" */
+
+}
+
+nav ul{
+    margin: 0;
+    padding: 0;
+    /* align-items all the way to the top and it is accualy on the side.*/
+    list-style: none;
+    /* get rid of the bullet points */
+}
+
+nav li{
+    margin-bottom: 1em;
+    margin-left: 1em;
+    /* spred the items  */
+    /* makes the items disapear */
+}
+
+nav a{
+    color: var(--text1);
+    text-decoration: none;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    opacity: 0;
+    /* for smoother opening transition I made the opacity 0 {make it disapear} and when it is clicked it goes to 1 {show} */
+    transition: opacity 150ms ease-in-out ;
+    /* take "this" much time before strarting my animation, so it would be 250ms before the animation would start. the animation time is also 250ms */
+}
+
+nav a:hover{
+    color: var(--textHover);
+}
+
+/* I have used a psudo class :checked -> this psudo class checks if a checked box is checked.
+The ~ is looking for a proceeding sibling, a container element that is after the current element. */
+/* 
+Works like an "if" statment 
+*/
+.nav-toggle:checked ~ nav{
+    /* look for the "nav" if the check box nav-toggle is checked. if the element is found do the following*/
+    transform: scale(1,1);
+    /* becaue of the transform:scale(1,0) that I put in the nav to make it disapear, now on click it would make it show in 100% Width and 100% Hight */
+    background: var(--navBackgroundHover);
+}
+
+.nav-toggle:checked ~ nav a{
+    opacity: 1;
+    /* if the menu icon was pressed show the items */
+    transition: opacity 250ms ease-in-out 250ms;
+    /* adding closing delay to the collapsing navbar */
+}
+
+.nav-toggle{
+    display: none;
+}
+
+.nav-toggle-label{
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 1em;
+    /* the followinf 3 settings are centering the menu icon to the center of the Y axis of the navbar */
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+/* ==================================================
+ creating the burger icon for the menu items to show 
+ ===================================================*/
+
+.nav-toggle-label span,
+.nav-toggle-label span::before,
+.nav-toggle-label span::after /*selecting the before and after psudo element as well as the span it self*/
+{
+    display: block;
+    background: white;
+    height: 2px;
+    width: 2em;
+    border-radius: 2px;
+    position: relative;
+    /* here the before and after are not showing yet so we will need to make the apear */
+}
+
+/* making the before and after to show */
+.nav-toggle-label span::before,
+.nav-toggle-label span::after{
+    content: '';
+    /* I put the content propetry here because if I would not have used it it would have set it to null and nothing would have showed up */
+    position: absolute;
+}
+
+.nav-toggle-label span::before{
+    bottom: 7px;
+    /* moving the bottom 7px down */
+}
+
+.nav-toggle-label span::after{
+    top: 7px;
+        /* moving the top 7px up */
+
+}
+
+
+
+/*
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    For PC, bigger Tablets and horizontal screens in general 
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+*/
+
+@media screen and (min-width:800px) {
+    .nav-toggle-label{
+        display: none;
+    }
+    header{
+        display: grid;
+        grid-template-columns: 1fr auto minmax(600px, 1fr) 1fr;
+        /* 
+        setting 4 columns.
+        *   fr    -> is a fruction unit for leftover space. so I'm telling the browser: "I want leftover space on the left and right"
+        *   auto    -> mean I want the logo space to be automaticly generated with minimum size of the given number in the bruckets and the maxinmum size would be 1fr 
+        */
+    }
+
+    .logo{
+        grid-column: 1/ 2;
+        /* positioaning the logo in the navbar */
+        font-size: 1.9rem;
+
+    }
+
+    nav{
+        all: unset;
+        grid-column: 2/4;
+        /* take all the items and display them in this fruction */
+        display: flex;
+        justify-content: flex-start;
+        align-items: center
+        /* making the items align to the center of the Y axis of the navbar */
+    }
+
+    nav ul{
+        display: flex;
+        /* making the items go next to each other */
+    }
+
+    nav li{
+        margin-left: 3em;
+        margin-bottom: 0;
+        /* making the items a bit more spread out and make then perfecly centered in the given space */
+    }
+
+    nav a{
+        opacity: 1;
+        /* show all the nav items */
+        position: relative;
+        font-size: 1.2rem;
+
+    }
+
+    nav a::before{
+        content: '';
+        display: block;
+        height: 5px;
+        background: black;
+        position: absolute;
+        top: -.75em;
+        left: 0;
+        right: 0;
+        transform: scale(0,1);
+        transition: transform ease-in-out 250ms;
+    }
+
+    nav a:hover::before{
+        transform: scale(1,1);
+    }
+}
+
+
+/* -----------------------> Page Content and styles start <----------------------- */
+
+.content{
+    color: var(--text1);
+    justify-items: center;
+    align-items: start;
+    width: 100%;
+    text-align: center;
+}
+
+.content h1{
+    grid-row: 2/ -1;
+    font-size: 5.7rem;
+    padding-top: 1em;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    display: none;
+    /* do not show the text on phones */
+    -webkit-text-stroke: 1px var(--text1);
+    color: transparent;
+    /* makes the text to show only the outline */
+}
+
+.content a{
+    font-size: 1.785rem;
+    text-decoration: none;
+    color: var(--text1);
+    display: inline-block;
+    border: 2px solid var(--text1);
+    padding: .5em;
+    margin-bottom: 0;
+    margin-top: 0;
+    border-radius: 3rem;
+}
+
+.back-video{
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+}
+
+@media screen and (min-width:800px) {
+    .content h1{
+        display: block;
+        transition: 0.2s;
+    }
+    
+    .content h1:hover{
+        color: var(--text1);
+        /* on hover I'm going to make only the text outline to fill */
+        cursor: default;
+    }
+    
+    
+}
+
+@media screen and (min-width:1486px) {
+    #section-1{
+        height: 900px;
+    }
+    .content h1{
+        margin-top: 2.7em;
+    }
+}
+
+@media screen and (min-width:1300px) {
+    #section-1{
+        height: 1200px;
+    }
+    .content h1{
+        margin-top: 3em;
+    }
+}
+
+@media screen and (min-width:1650px) {
+    .content h1{
+        margin-top: 4em;
+    }
+    
+}
+
+/* -----------------------> Section 2 */
+#section-2{
+    text-align: center;
+    color: var(--text1);
+    grid-column: 1/2;
+    align-items: center;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+#intro h2{
+    font-size: 1.3em;
+    margin-bottom: 2em;
+}
+
+.widescreen-table{
+    display: none;
+}
+
+@media screen and (min-width:800px) {
+    #section-2{
+        margin: 0em 0em 0em 0em;
+        font-size: 2em;
+    }
+    
+    #section-2 span{
+        font-size: 2em;
+    }
+    
+    #section-2 p{
+        font-size: .9em;
+    }
+    
+    .widescreen-table{
+        display: block;
+    }
+
+    .thin-table{
+        display: none;
+    }
+}
+
+.thin-table{
+    margin: 1em;
+}
+
+.thin-table span{
+    font-size: 4em;
+}
+
+.thin-table p{
+    font-size: 3em;
+}
+
+
+
+/* =========================
+ creating a scroll animation 
+ ==========================*/
+ 
+ .hidden{
+     opacity: 0;
+     filter: blur(5px);
+     transform: translateX(-100%);
+     transition: all 1000ms;
+}
+
+.show{
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+}
+
+.tabs:nth-child(2){
+    transition-delay: 200ms ;
+}
+
+.tabs:nth-child(3){
+    transition-delay: 400ms ;
+}
+
+.text{
+    opacity: 0;
+    filter: blur(5px);
+    transition: all 1500ms;
+}
+
+.text2{
+    opacity: 0;
+    filter: blur(5px);
+    transition: all 1500ms;
+}
+
+.show1{
+   opacity: 1;
+   filter: blur(0);
+}
+
+@media screen and (min-width:800px) {
+    .text{
+        transition: all 2500ms;
+    }
+    
+    .text2{
+        transition: all 2500ms;
+    }
+}
+
+/* ===============
+ outersection text 
+ ================*/
+ .text{
+     padding-top: 4em;
+     text-align: center;
+     color: var(--text1);
+     
+ }
+ 
+ .text h3{
+     margin-bottom: .9em;
+     padding-bottom: .01em;
+     font-size: 1.8em;
+}
+    
+.text a{
+    text-decoration: none;
+    /* hide the underline uner links */
+    color: var(--text1);
+}
+
+@media screen and (min-width:800px) {
+    .text{
+        padding-top: 0em;
+    }
+    #text h3{
+        margin-top: 0;
+    }
+}
+    
+/* ===============
+ About us Section 
+================*/
+
+#about-us{
+    margin:1.25em;
+}
+
+#about-us p{
+    font-size: 1.2em;
+}
+.thin-screen span{
+    font-weight: bold;
+}
+
+.wide-screen{
+    display: none;
+}
+
+@media screen and (min-width:800px) {
+    #about-us{
+        text-align: center;
+        margin: 17em;
+        margin-top: 6.5em;
+    }
+
+    #about-us h2{
+        font-size: 3rem;
+    }
+
+    #about-us p{
+        font-size: 1.25em;
+    }
+
+    .thin-screen{
+        display: none;
+    }
+
+    .wide-screen{
+        display: block;
+    }
+}
+
+/* ===============
+ outersection text 
+ ================*/
+ 
+ #our-mission h3{
+     margin: 1em;
+     font-size: 1.225em;
+    }
+    
+    @media screen and (min-width:800px) {
+        #our-mission h3{
+            margin-top: 0em;
+            margin: 3em;
+            font-size: 1.25em;
+        }
+
+        #our-mission .text{
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+    }
+
+/* ================
+ contact us section 
+ ================*/
+
+#contact-us{
+    align-items: center;
+    text-align: center;
+    padding-top: 4em;
+}
+
+#contact-us span{
+    /* drawing a line that will croos the entire page based on screen size */
+    margin: auto;
+    display: block;
+    background: white;
+    height: 2px;
+    width: 80%;
+    border-radius: 2px;
+    position: relative;
+    /* here the before and after are not showing yet so we will need to make the apear */
+}
+
+#contact-us p{
+    margin: 3em;
+    text-align: center;
+}
+
+#contact-us a{
+    text-decoration: none;
+    color: var(--text2);
+}
+
+@media screen and (min-width:800px) {
+    #contact-us p{
+         margin: 5em;
+         font-size: 1em;
+    }
+}
+
+/* contact card */
+
+
+.card {  
+    max-width: 300px;
+	border: .2em solid var(--text1);
+    border-radius:1em;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+}
+
+@media screen and (min-width:800px) {
+    
+
+}
+
+.card img{
+    border-radius: 1em 1em 0 0;
+}
+
+.card:hover{
+  box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2);
+}
+
+.title {
+  color: var(--text2);
+  font-size: 18px;
+}
+
+.icons a {
+  text-decoration: none;
+  font-size: 22px;
+  color: var(--text1);
+}
+
+.icons a:hover {
+  opacity: 0.7;
+}
+
+@media screen and (min-width:800px) {
+    .phone{
+        display: none;
+    }
+}
+
+/* ===========================
+ callout chicken image section 
+ ============================*/
+
+#callout {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px;
+    background-color:none;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    max-width: 300px;
+    border-radius: 1em;
+}
+
+#callout span{
+    margin-right: 1em;
+    margin-top: .5em;
+}
+
+#callout img {
+    width: 100%;
+    height: auto;
+}
+
+#closeButton:hover{
+    text-decoration:underline;
+}
+
+#closeButton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    color:white;
+    
+}
+
+/* ------------------------ Log in style ------------------------ */
