@@ -300,7 +300,7 @@ body{
 }
 
 .card span{
-    font-size: 2em;
+    font-size: 1.8em;
     font-weight: 400;
 }
 
@@ -320,6 +320,9 @@ body{
     font-size: 2em;
 }
 
+#temperature-data2{
+    padding-left: 0.4em;
+}
 
 .card-spo1{
     justify-content:center;
@@ -391,12 +394,6 @@ body{
     }
 }
 
-/* @media screen and (min-width:1560px) {
-    .charts-active{
-        grid-template-columns: 1fr;
-
-    }
-} */
 
 /* Medium size screen */
 @media screen and (max-width:1024px){
@@ -487,55 +484,7 @@ body{
 }
 
 /* ----------------------------------------- beating heart animation */
-.heart-rate{
-    position: relative;
-    margin: 20px auto;
-}
-
-.fade-in{
-    position: absolute;
-    width: 30%;
-    height: 100%;
-    background-color: var(--textHover);
-    top: 0;
-    right: 0;
-    animation: heartRateIn 2.5s linear infinite;
-}
-
-.fade-out{
-    position: absolute;
-    width: 30%;
-    height: 100%;
-    background-color: var(--textHover);
-    top: 0;
-    right: 0%;
-    animation: heartRateOut 2.5s linear infinite;
-    background: var(--textHover);
-}
-
-@keyframes heartRateIn{
-    0%{
-        width: 100%;
-    }
-    50%{
-        width: 0;
-    }
-    100%{
-        width: 0;
-    }
-}
-
-@keyframes heartRateOut{
-    0%{
-        right: 0%;
-    }
-    30%{
-        right: 0%;
-    }
-    100%{
-        right: 0;
-    }
-}
+  
 
 /* ----------------------------------------- Stop Watch */
 
@@ -599,90 +548,109 @@ th {
 }
 
 #reports{
-    /* display: none; */
     background-color: var(--textHover);
     border-radius: 1em;
     padding-bottom: 1em;
 }
 
-.date{
-    margin-right: 1em;
-}
-
-.report-container{
-    display: grid;
-    grid-template-columns: 20% 78%;
-}
-
-.report-container div{
-    margin: 1em;
-}
-
-.value{
+.chart-report{
+    height: 10vh;
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: space-evenly;
-    padding: 2em;
-    background-color: var(--text1);
-    color: var(--sideBar);
-    box-sizing: border-box;
-    border: none;
-    border-radius: 1em;
-    font-size: 1.5em;
-    
 }
 
-.value input{
-    text-align: center;
-    font-size: .8em;
+.title{
+    padding-top: .25em;
+    text-align: center; 
+    font-size: 2em; 
 }
 
-.value:first-child:hover{
-    box-shadow: 1px 1px 20px red;
-}
-
-.value:nth-child(2):hover{
-    box-shadow: 1px 1px 20px lightblue;
-}
-
-.value:nth-child(3):hover{
-    box-shadow: 1px 3px 20px orange;
-}
-
-#valueUpdate{
-    margin-left: .8em;
-    font-size: 3em;
-    color: var(--text1);
-}
-
-#valueUpdate:hover{
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-.report-container2{
-    display: grid;
-    grid-template-columns: 60% 40%;
-}
-
-/* ----------------------------------------- ring chart */
-.ring-chart {
-    width: 400px;
-    height: 400px;
+.skill{
+    width: 10rem;
+    height: 10rem;
     position: relative;
 }
-.ring {
+
+.outer-c{
+    height: 160px;
+    width: 160px;
+    border-radius: 50%;
+    box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15),-6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inner-c{
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    box-shadow: inset 4px 4px 6px -1px rgba(0, 0, 0, 0.2),
+                inset -4px -4px 6px -1px rgba(255, 255, 255, 0.7), 
+                inset -.5px -.5px 0px rgba(255, 255, 255, 1), 
+                inset -.5px -.5px 0px rgba(0, 0, 0, .15),
+                inset 0px 12px 10px -10px rgba(0, 0, 0, .05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#number{
+    font-weight: 600;
+    color: #555;
+
+}
+
+circle{
     fill: none;
-    stroke-width: 20;
+    stroke: url(#GradientColor);
+    stroke-width: 20px;
+    stroke-dasharray: 472;
+    stroke-dashoffset: 472;
+    animation: circleFill 2s linear forwards;
 }
 
-/* ----------------------------------------- Data */
-#data{
-    display: inline-flex;
-    flex-direction: row;
+@keyframes circleFill {
+    100%{
+        stroke-dashoffset: 165;
+    }
+}
+
+svg{
+    position: absolute;
+    top: 0;left: 0;
+}
+
+.chart-report, .charts-con{
+    margin-bottom: 2em;
+    margin-top: 2em;
+}
+
+.summery-report{
+    padding-bottom: 2em;
+}
+
+.summery-report h2{
+    padding-top: 2em;
+    text-align: center;
+}
+
+.summery-report h3{
+    padding: 1em;
+    margin-bottom: 0;
+}
+
+.summery-report p, .summery-report span{
+    font-size: 1.1em;
+    padding: 1.5em;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    width: 80%;
+
+}
+
+#report{
+    font-size: 1em;
     text-align: start;
-}
-
-#workoutDuration{
-    margin: 0;padding: 0;
 }

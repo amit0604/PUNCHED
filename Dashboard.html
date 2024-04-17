@@ -8,15 +8,19 @@
     <link rel="stylesheet" href="/Additionals/styleDashboard.css">
 
     <!-- firebase js -->
-    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-storage-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-database-compat.js"></script>
     <script src="/Additionals/js/initializeFirebase.js"></script>
+    <script src="/Additionals/js/firebaseValues.js"></script> 
+
 
 
     <!-- link to charts libraries-->
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
     <!-- import icons` -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
@@ -119,7 +123,6 @@
                                 <div class="space"></div>
                                 <div class="mph">
                                     <span id="spo2-data2"></span>    
-                                    <span>%</span>
                                 </div>
                             </div>
                         </div>
@@ -133,13 +136,12 @@
                         
                     </div>
                     
-                    <!-- ApexCharts -->
+                    <!-- HeartRate ecg monitor -->
                     <div class="charts">
                         <div class="charts-card">
                             <p class="chart-title">Heart Rate</p>
-                            <div id="area-chart" class="chart"></div>
-                        </div>
-                        
+                            <canvas id="ecgChart" width="800rem" height="150rem"></canvas>
+                        </div>                                                                        
                         <div class="charts-card" onclick="quickStart(), watchStart()">
                                 <p class="chart-start">Quick Start</p>
                         </div>
@@ -156,24 +158,12 @@
                     
                     <!-- Heart Rate -->
                     <div class="charts-active">
+
                         <div class="charts-card practice-card">
                             <p class="chart-title">Heart Rate</p>
-                            <div class="card-inner card-heart">
-                                <div class="card-heart-rate">
-                                    <span class="heart"></span>
-                                    <span class="heart">BPM</span>
-                                </div>
-                                <div class="container-heart-rate">
-                                    <div class="content-heart-rate">
-                                        <div class="heart-rate">
-                                            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="65%" height="73px" viewBox="0 0 150 73" enable-background="new 0 0 150 73" xml:space="preserve">
-                                                <polyline fill="none" stroke="red" stroke-width="3%" stroke-miterlimit="10" points="0,45.486 38.514,45.486 44.595,33.324 50.676,45.486 57.771,45.486 62.838,55.622 71.959,9 80.067,63.729 84.122,45.486 97.297,45.486 103.379,40.419 110.473,45.486 150,45.486,"/>
-                                            </svg>
-                                            <div class="fade-in"> </div>
-                                            <div class="fade-out"> </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="card-inner card-spo2">
+                                <span id="heart-rate-data2" class="heart"></span>
+                                <span class="heart">&nbsp; BPM</span>
                             </div>
                         </div>
                 
@@ -188,18 +178,13 @@
                     
                         <!-- Speed -->
                         <div class="charts-card practice-card">
-                            <p class="chart-title">Speed</p>
-                            <div class="card-inner card-heart">
-                                <div class="kmp">
-                                    <span id="speed-data"></span>
-                                    <span>KMH</span>
-                                </div>
-                                <div class="mph">
-                                    <span id="speed-data2"></span>    
-                                    <span>MPH</span>
-                                </div>
+                            <p class="chart-title">Meters per Hour</p>
+                            <div class="card-inner card-spo2">
+                                <span id="speed-data"></span>
+                                <span>&nbsp; m/h</span>
                             </div>
                         </div>
+                                   
                     </div>
 
                     <div id="time-container">
@@ -245,39 +230,103 @@
                 </div>
                 
                 <div class="summery">  
-                    <div class="report-container">
-                        <div class="values">
-                            <div class="value">
-                                <label for="ring1">BPM:</label>
-                                <input type="number" id="ring1" value="65" min="0" max="100">
+                    <div class="report-container" style="background-color: #e3edf7; width: 85%; margin: auto; border-radius: 1em;">
+                        <div class="title">
+                            <h2>Your top measures</h2>
+                        </div>
+                        <div class="charts-con">
+                            <!-- BPM -->
+                            <div class="chart-report">
+                                <div class="skill">
+                                    <div class="outer-c">
+                                        <div class="inner-c">
+                                            <div id="number">
+                                                
+                                            </div>
+                                    </div>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+                                    <defs>
+                                        <linearGradient id="GradientColor">
+                                            <stop offset="0%" stop-color="#e91e63" />
+                                            <stop offset="100%" stop-color="#673ab7" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="80" cy="80" r="70" stroke-linecap="round"/>
+                                </svg>
                             </div>
-                            <div class="value">
-                                <label for="ring2">SPO2:</label>
-                                <input type="number" id="ring2" value="84" min="0" max="100">
+                            <!-- spo2 -->
+                            <div class="chart-report">
+                                <div class="skill">
+                                    <div class="outer-c">
+                                        <div class="inner-c">
+                                            <div id="numberspo">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+                                        <defs>
+                                            <linearGradient id="GradientColor">
+                                                <stop offset="0%" stop-color="#e91e63" />
+                                                <stop offset="100%" stop-color="#673ab7" />
+                                            </linearGradient>
+                                        </defs>
+                                        <circle class="circle2" cx="80" cy="80" r="70" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
                             </div>
-                            <div class="value">
-                                <label for="ring3">Speed:</label>
-                                <input type="number" id="ring3" value="21" min="0" max="100">
+                            <!-- speed -->
+                            <div class="chart-report">
+                                <div class="skill">
+                                    <div class="outer-c">
+                                        <div class="inner-c">
+                                            <div id="numberspeed">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+                                        <defs>
+                                            <linearGradient id="GradientColor">
+                                                <stop offset="0%" stop-color="#e91e63" />
+                                                <stop offset="100%" stop-color="#673ab7" />
+                                            </linearGradient>
+                                        </defs>
+                                        <circle class="circle3" cx="80" cy="80" r="70" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
                             </div>
-                            <div class="vlaue">
-                                <label id="valueUpdate" for="valueUpdate" onclick="updateRings()">Update</label>
-                                <input type="button" id="valueUpdate" style="display: none;">
-                                <!-- <button onclick="updateRings()">Update</button> -->
-                            </div>
-                        </div>  
-                        <div class="card report-container2">
-                            <div class="data">
-                                <span class="report-text">
-                                    The workout was <span id="workoutDuration" style="font-size: .8em;"></span> long
-                                    <br>
-                                    And you reached <span id="workoutHeartRate" style="font-size: .8em;"></span> beats per minute
-                                    <br>
-                                    Your SpO2 % level was at <span id="workoutSpo2" style="font-size: .8em;"></span>
-                                    <br>
-                                    Your punching speed was <span id="workoutSpeed" style="font-size: .8em;"></span> KPH
-                                </span>                                
-                            </div>
-                            <div class="ring-chart"></div>
+                        </div>
+                        <div class="summery-report">
+                            <h2>Workout Summery</h2>
+                            <p>Your workout today was analyzed based on several key factors including heart rate,
+                                blood oxygen saturation, and speed. Here's a summary of your performance:
+                            </p>
+                            <h3>Heart Rate (bpm):</h3>
+                            <span>
+                                - Your heart rate during the workout was a crucial indicator of your cardiovascular exertion. <br>
+                            </span>
+                            <span>
+                                - An optimal heart rate range during exercise indicates that your cardiovascular system is effectively being challenged.
+                            </span>
+                            <h3>Blood Oxygen Saturation (SpO2):</h3>
+                            <span>
+                                - Your blood oxygen saturation levels provide insight into how well your body is delivering oxygen to your muscles during exercise.<br>
+                            </span>
+                            <span>
+                                - Maintaining adequate blood oxygen levels is essential for sustaining energy levels and performance.
+                            </span>
+                            <h3>Speed:</h3>
+                            <span>
+                                - Your speed during the workout reflects the intensity and efficiency of your movements. <br>
+                            </span>
+                            <span>
+                                - Adjusting your speed can help tailor the workout to your fitness goals, whether it's building endurance, improving cardiovascular health.
+                            </span>
+                            <h3>Overall Assessment:</h3>
+                            <span>
+                                <span id="report"></span>
+                            </span>
+                        </div>
                         </div>
                     </div>
                 </div>                                      
@@ -297,6 +346,7 @@
         <script src="/Additionals/js/stopWatch.js"></script>
         <script src="/Additionals/js/report.js"></script> 
         <script src="/Additionals/js/ringChart.js"></script> 
+        <script src="/Additionals/js/ecg.js"></script> 
         
     </div>
 </body>
